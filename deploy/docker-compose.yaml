@@ -1,0 +1,18 @@
+
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: multi-cloud-saas-web
+    volumes:
+      - ../backend:/app
+      - ~/.oci:/root/.oci:ro  # OCI 설정 파일 마운트
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - OCI_CONFIG_FILE=/root/.oci/config
+
